@@ -36,7 +36,7 @@ class GenericDevice {
             case IOType.DUPLO_TRAIN_BASE_SPEAKER:
                 return 1; // Sound
             case IOType.DUPLO_TRAIN_BASE_COLOR_SENSOR:
-                return 0; // Color
+                return 1; // Color
             case IOType.DUPLO_TRAIN_BASE_SPEEDOMETER:
                 return 1; // Driving Distance
             case IOType.REMOTE_POWER_CONTROL_BUTTON:
@@ -113,9 +113,17 @@ class GenericDevice {
                 break;
 
             case IOType.DUPLO_TRAIN_BASE_COLOR_SENSOR:
-                this._inputValues = {
-                    color: buffer.readInt8(0)
-                };
+                const value = buffer.readInt8(0);
+                if (value > -1) {
+                    this._inputValues = {
+                        color: value
+                    };
+                    setTimeout(() => {
+                        this._inputValues = {
+                            color: -1
+                        };
+                    }, 100);
+                }
                 break;
 
             case IOType.DUPLO_TRAIN_BASE_SPEEDOMETER:

@@ -6,7 +6,7 @@ const Hub = require('./lib/hub');
 const Color = require('./lib/color');
 const setupTranslations = require('./lib/setup-translations');
 
-const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAUKADAAQAAAABAAAAUAAAAAAx4ExPAAAEMElEQVR4Ae2bT0hUQRzHf0/X1S0LErrYn4OHIoU6RhfDJYwV65ZUekuCsJMXFZQMjfRSlyIIu2WFEgSFixJGXjoGwQp18NAfL5FBba3a6mt+u46sw8x7M/seu+7z92CZN7/5zfze77PfmXlv/wDQQQSIABEgAkSACBABIkAEiAARIAJEgAgQASJQOAKWbqi3L8GW+Z4+B5kx3NplfYNgKwtCEsXMQalAlaIKfbFc4YWOqxuPFKhLSuEXUtg3zY2nNk8LejL3rqDh8g5GCswbXbajqwJLRQm6HKZ2y+8mWv5k7yZ0x+F+pEBOIs9SuQvz8fg7FnPVKu/hrYyns/1FRUzvhdj6GjxkN6MHZRFYIl/LyuHq2V8Ql7XHqyFh21Ava+M2y4L5WBIaeF2nLBkFOsHDRBEs+jgkPeHQxpt0fLhvpiyQrrbEzKvClaeaCahc7iMLwNommX0wzKQaLYfNBY/ZYXYNYJWdbPjIuittJaNAZQaaDS1JmMcpiqB+ILWNA8/Rhm3ow+26pec1kK9ZugG5n5OSuE8xSre1VLymHaNAMXFVnYnRbS3d0tW3NVDcNbdEyanwXT3HJD1VKVTq7KPRbS0VQ5ECRSKGdQJoCEx0J4AiEcM6ATQEJroTQJGIYZ0AGgIT3QmgSMSwTgANgYnuBFAkYlj37UlE9wnD8Pq2vTsp0ONb5FmBxXpm9Zi3b91JgR5Relagx/jK7vl+zqgc0LCBr+lunzKRAg3Biu7bToHbZU3VnQGkQFFShnUCaAhMdCeAIhHDOgE0BCa6E0CRiGFd+b1w/+3xnK+fDUcNoPtwX7uUFSnQ45vteh8Ynxz1GKK0u8cu9DgmQAp0xOPe6KpA9yFK2+PV1IxWAsN9cjdSoJyLtlWpQAuspA12dVWkGpZTSe0BS82xtaVZecmYe1NrF/stoaUE4KTABI5cs/+QMkDQG3Jyz7CQ5asEaFnWI+xw9HgTVISrZH0DbcOcMXc8OAtZwtKbQ3S0bdsaGH36mp1El1O/4eOHN7D0/UugpzPmjdMWlYfwqiJ7kN7sUM+lMwyi9MFCvQayDrfuPu9Iraw8ZgNFT5w8j+PvrIPBi1RWdqjgIQylAjkpVOKN0WedrLzCbA24sfC2IJYbG0YCp+3NnotjTvAwf1eAOpD6R8bvsZ+4d+2KhKG5sQEO1NZIu31bXIKZuQT8Ta1i5PvDve3XpY6GxmLGV05hkxxCdRXd6YX0MQYm+mL6PdQfqc28avZlxbr0k/38/dNi5pUZl02NUF2o2ySGk28x4/uiQExucGIinF74d4cttdfYaivd3VmwdduCB5jwYFsbk6F/R7Hi+waQoxgYeYJ/lepkuze7Q7UOZ+32Z7ab4TPT2FDvZeU9FR/DS1ns+F6unfoSASJABIgAESACRIAIEAEiQASIABEgAkSACLgR+A/LqB1v+aX9ZAAAAABJRU5ErkJggg==';
+const blockIconURI = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAUKADAAQAAAABAAAAUAAAAAAx4ExPAAAEl0lEQVR4Ae2bT0jUQRTHZ9xV1/4cMio0aUUqyoQKuniooLBO0amgoi55icLASwpWYkZ2KZKii12KDJSg6JYUVAePGtQSFZLiHzCyQ5pbrk7zdnfW3WXmN7PO+ts/vQX5zW/em3m/99nvvPntz11C8IUEkAASQAJIAAkgASSABJAAEkACSAAJIAEk4B4BahrqzQvCZL77j5DwHDq7bGw+9BXkQxKZzEGpQJWi3L5YoXC345rGQwWaklL4eRX9se59tbGmq423/a6GW3IwVOCS0UUGahWYK0ow5fCtdqf0bqKy/71yP3CaGxXoRMfApqUu3jG/v8ZgOnuX4eEP4UmSFcGOHSsaGfvaRgg7wxgri49EKZ0ghD7ctHHzFdrb+zfeJtrDtbs+MsKqxbnsSAkN+PsHd8hsqr6cUSDAY2zhUjI8SAz6wBYBrEiVkl6FZbGbkp7FE7OWtgaaTeOGFzsDUTas9xNfyeqEgLOzv8jk5DDvC/s0JRjFiYf2kBC76inwsIqKbVxs0cXHGBkd/cTmF+Yp8VA9ZDFf9JgzChTXLd0BhNHh6H83EIAlCqCCwZmYJ7ShL7x8uU/MYNiwroGiZhnGi7mpaqqYD+qabLnGJliGhkktTQ6btUvYbXgAJhKTQS2FU3kpAEvcK20Ak3fNuBgJTbGrJ3RKTmS1TuKW1i6jWpoUMWtrYPJGkXTdy3JaEt2cUlF/1gJcFkLLMCkCtISKABGgJQHL4ahABGhJwHI4KhABWhKwHJ62TyKmnzAsrzfrhuMStnxLrBWoeqpieV05MzxrFQgf7N1+iZiRx1pm0a0VaBYmda/IE+bUx6VjBDxMEDVd95QpaxWYDhBuzJF1CsyWmiqejOveBFSgjpDGjgA1gHRmBKgjpLEjQA0gnRkB6ghp7Mr/C7fceLzU/2FrQuamub35lJQVKtDy/dTeB34eeG4ZIreHb9191DEBVKAjHr1Rq0D9FLntcaez0yiB9ma5GypQzsW4V6lA/nWvaf6NzlXeQh8JzQWNJ8w1x4sNDcpLhtyrag7zn2LRaZWTkwI/wqCSVWtVY/O+Py73MAtZwk4Au2DAuooaVuAplI3N6z7IGXKPJhlmIUtYenMIjvyhIr1ys7uPfwP2YCgUZN9HP9DZ6R95vZwhb1i2oDyA5/X6+MNp8qrt0sk63hAwwS32UtdAPuD67aeng3+Cj/hEB8sq98QG/SeNMDxfse+0Ch5wUCpQQAorsePJWX5ez/92wMYibPl4jG4YUPO62ppOPHCCB/lrAZpAaul4fJf/mvj8yhXFrG5vNd1YXiodNjY+RfreBdjM7z/8Osm99qZTF6SOKXZmMr5yCaeSg7eqsDE0FNrOwRx49nKQVW8po9Vby0npmohYp35Ok8DncRL4MsEFzDg8+tpb5W1MJYaTbybjp0WBkFxrT09RaGjuFi+153i1le7uPNgCx3cfEm49flz6iyInUE62TMVPG0CR3OWObvipVD1X2iFeITZF+tkIV91L3u661nRSeU8l5rA5Zjq+zbXjWCSABJAAEkACSAAJIAEkgASQABJAAkgACSABHYF/doZ0OkkMt+gAAAAASUVORK5CYII=';
 
 const BLESendInterval = 100;
 const waitPromise = () => new Promise(resolve => window.setTimeout(resolve, BLESendInterval));
@@ -78,7 +78,7 @@ class Scratch3DuploTrainBlocks {
                         },
                         POWER: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: 100
+                            defaultValue: 50
                         }
                     }
                 },
@@ -126,7 +126,7 @@ class Scratch3DuploTrainBlocks {
                     opcode: 'whenColor',
                     text: formatMessage({
                         id: 'duplotrain.whenColor',
-                        default: 'when ground color is [SENSOR_COLOR]'
+                        default: 'when passing over [SENSOR_COLOR] action block'
                     }),
                     blockType: BlockType.HAT,
                     arguments: {
@@ -137,6 +137,7 @@ class Scratch3DuploTrainBlocks {
                         }
                     }
                 },
+                /*
                 {
                     opcode: 'isColor',
                     text: formatMessage({
@@ -160,6 +161,7 @@ class Scratch3DuploTrainBlocks {
                     }),
                     blockType: BlockType.REPORTER
                 },
+                */
                 {
                     opcode: 'getDrivingDistance',
                     text: formatMessage({
@@ -310,52 +312,38 @@ class Scratch3DuploTrainBlocks {
                     items: [
                         {
                             text: formatMessage({
-                                id: 'legobluetooth.black',
-                                default: '(0) Black'
-                            }),
-                            value: String(Color.BLACK)
-                        },
-                        {
-                            text: formatMessage({
-                                id: 'legobluetooth.blue',
-                                default: '(3) Blue'
+                                id: 'duplotrain.blue',
+                                default: 'Blue'
                             }),
                             value: String(Color.BLUE)
                         },
                         {
                             text: formatMessage({
-                                id: 'legobluetooth.lightGreen',
-                                default: '(5) Light green'
+                                id: 'duplotrain.lightGreen',
+                                default: 'Green'
                             }),
                             value: String(Color.LIGHT_GREEN)
                         },
                         {
                             text: formatMessage({
-                                id: 'legobluetooth.yellow',
-                                default: '(7) Yellow'
+                                id: 'duplotrain.yellow',
+                                default: 'Yellow'
                             }),
                             value: String(Color.YELLOW)
                         },
                         {
                             text: formatMessage({
-                                id: 'legobluetooth.red',
-                                default: '(9) Red'
+                                id: 'duplotrain.red',
+                                default: 'Red'
                             }),
                             value: String(Color.RED)
                         },
                         {
                             text: formatMessage({
-                                id: 'legobluetooth.white',
-                                default: '(10) White'
+                                id: 'duplotrain.white',
+                                default: 'White'
                             }),
                             value: String(Color.WHITE)
-                        },
-                        {
-                            text: formatMessage({
-                                id: 'legobluetooth.noColor',
-                                default: '(-1) No color'
-                            }),
-                            value: String(Color.NONE)
                         },
                     ]
                 },
@@ -412,7 +400,7 @@ class Scratch3DuploTrainBlocks {
                 'duplotrain.motorStop': '止まる',
                 'duplotrain.playSound': '[SOUND] の音を鳴らす',
                 'duplotrain.setHubLEDColor': 'ライトの色を [COLOR] にする',
-                'duplotrain.whenColor': '地面の色が [SENSOR_COLOR] のとき',
+                'duplotrain.whenColor': '[SENSOR_COLOR] のアクションブロックを通ったら',
                 'duplotrain.isColor': '地面の色が [SENSOR_COLOR]',
                 'duplotrain.getColor': '地面の色',
                 'duplotrain.getDrivingDistance': '走行距離',
@@ -422,13 +410,19 @@ class Scratch3DuploTrainBlocks {
                 'duplotrain.refill': '給水',
                 'duplotrain.horn': '汽笛',
                 'duplotrain.steam': '蒸気',
+
+                'duplotrain.blue': '青',
+                'duplotrain.lightGreen': '緑',
+                'duplotrain.yellow': '黄色',
+                'duplotrain.red': '赤',
+                'duplotrain.white': '白',
             },
             'ja-Hira': {
                 'duplotrain.motorPWM': '[DIRECTION] ほうこうに [POWER] %のパワーではしる',
                 'duplotrain.motorStop': 'とまる',
                 'duplotrain.playSound': '[SOUND] のおとをならす',
                 'duplotrain.setHubLEDColor': 'ライトのいろを [COLOR] にする',
-                'duplotrain.whenColor': 'じめんのいろが [SENSOR_COLOR] のとき',
+                'duplotrain.whenColor': '[SENSOR_COLOR] のアクションブロックをとおったら',
                 'duplotrain.isColor': 'じめんのいろが [SENSOR_COLOR]',
                 'duplotrain.getColor': 'じめんのいろ',
                 'duplotrain.getDrivingDistance': 'そうこうきょり',
@@ -438,6 +432,12 @@ class Scratch3DuploTrainBlocks {
                 'duplotrain.refill': 'きゅうすい',
                 'duplotrain.horn': 'きてき',
                 'duplotrain.steam': 'じょうき',
+
+                'duplotrain.blue': 'あお',
+                'duplotrain.lightGreen': 'みどり',
+                'duplotrain.yellow': 'きいろ',
+                'duplotrain.red': 'あか',
+                'duplotrain.white': 'しろ',
             }
         });
     }
